@@ -1,0 +1,26 @@
+description "django-app"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+
+respawn
+setuid nobody
+setgid www-data
+
+env SECRET_KEY='{{ SECRET_KEY }}'
+env DATABASE_NAME='{{ DATABASE_NAME }}'
+env DATABASE_HOST='{{ DATABASE_HOST }}'
+env DATABASE_USER='{{ DATABASE_USER }}'
+env DATABASE_PASSWORD='{{ DATABASE_PASSWORD }}'
+env GMAIL_PW='{{ GMAIL_PW }}'
+env IAM_USER_SECRET_ACCESS_KEY='{{ IAM_USER_SECRET_ACCESS_KEY }}'
+env IAM_USER_ACCESS_KEY_ID='{{ IAM_USER_ACCESS_KEY_ID }}'
+
+chdir /home/ubuntu/django_imager/imagersite
+
+exec ./manage.py thumbnail clear_delete_all
+
+chdir /home/ubuntu/django_imager/imagersite/imagersite
+
+exec /usr/bin/gunicorn wsgi:application
