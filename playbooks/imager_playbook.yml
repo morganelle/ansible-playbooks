@@ -44,7 +44,7 @@
           - gunicorn
 
       - name: Clone the Django Imager Project to the Home Directory
-        git: clone=yes repo=https://github.com/kurtrm/django_imager.git dest=/home/ubuntu/django_imager version=ansible
+        git: clone=yes repo=https://github.com/kurtrm/django_imager.git dest=/home/ubuntu/django_imager version=s3
 
       - name: Install app
         pip: requirements=/home/ubuntu/django_imager/requirements.pip
